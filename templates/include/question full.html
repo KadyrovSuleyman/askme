@@ -1,0 +1,31 @@
+{% load static %}
+<div class="container-fluid question-full-container">
+    <div class="row">
+        <div class="col-2 question-left-board">
+            <div class="row justify-content-center">
+                <img src="{% static 'img/200.jpg' %}">
+            </div>
+            <div class="row justify-content-center upvote-buttons-container">
+                <button type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                <input type="number" min="-100" max="100" value="1" readonly class="raz">
+                <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+            </div>
+        </div>
+        <div class="col-10 question-right-board">
+            <div class="row-fluid question-title">
+                <label>{{ question.title }}</label>
+            </div>
+            <div class="row-fluid question-text">
+                <label>{{ question.text }}</label>
+            </div>
+            <div class="row justify-content-end question-bottom-board">
+                <div class="col">
+                    <label>Tags:</label>
+                    <a href="#">depression</a>
+                    <a href="#">melancholy</a>
+                    <a href="#">yearning</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

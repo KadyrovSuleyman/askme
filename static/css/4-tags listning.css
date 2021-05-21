@@ -1,0 +1,274 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    /*border: 1px red solid;*/
+}
+
+.navbar img {
+    width: 60px;
+    border: 2px purple solid;
+    border-radius: 30px;
+}
+
+.search-form {
+    width: 374px;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+
+.padding-0 {
+    padding: 0px;
+}
+
+.main-workspace {
+    margin-top: 90px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.navbar {
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    height: 76px;
+    padding-right: 15px;
+}
+
+.work-container {
+    float: right;
+    margin: 0 auto;
+}
+
+.left-board {
+    margin: 0px;
+    padding: 0px;
+    padding-right: 12px;
+}
+
+.header-label {
+    font-size: 1.5rem;
+}
+
+
+.tags-container {
+    height: 125px;
+}
+
+.tags-container a {
+    font-size: 1.125rem;
+    padding-right: 14px;
+    text-decoration: none;
+    color: purple;
+}
+
+.tags-container a:hover {
+    color: blue;
+}
+
+.members-container a {
+    font-size: 1.125rem;
+    color: #842029;
+}
+
+.members-container a:hover {
+    /*color: #270c79;*/
+    color: blue;
+}
+
+.members-container {
+    height: 175px;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.profile-label {
+    color: magenta;
+    padding-left: 7px;
+}
+
+.profile-link {
+    color: pink;
+    padding-left: 7px;
+}
+
+
+
+.profile-container a:hover {
+    color: red;
+}
+
+.btn-outline-success {
+    color: #d684c0;
+    border-color: #7c0c84;
+}
+
+.navbar-collapse a:hover {
+    background-color: purple;
+    border-color: #7c0c84;
+}
+
+.right-board {
+    margin: 0px;
+    padding: 0px;
+}
+
+.questions-header label {
+    font-size: 1.625rem;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.questions-header a {
+    font-size: 1.125rem;
+    color: purple;
+}
+
+.questions-header a:hover {
+    color: blue;
+}
+
+.question-container a {
+    font-size: 1.125rem;
+    color: purple;
+}
+
+.question-container a:hover {
+    color: blue;
+}
+
+
+.question-container {
+    margin: 0px;
+    padding: 7px;
+    padding-top: 3px;
+    border: 2px #710071 solid;
+    border-radius: 10px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.question-container img {
+    width: 60px;
+    border: 2px purple solid;
+    border-radius: 30px;
+    padding: 0px;
+    margin-top: 5px;
+}
+
+.question-left-board {
+    padding-bottom: 10px;
+}
+
+.question-right-board {
+    padding-left: 0px;
+}
+
+.question-left-board button {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 20px;
+    border: 1px purple solid;
+    border-radius: 3px;
+    background: #f4e0f7;
+    color: #4a004a;
+}
+
+.question-right-board label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    margin-right: 7px;
+}
+
+.raz {
+  all: unset;
+  -moz-appearance: textfield;
+  width: 3em;
+  text-align: center;
+}
+.raz::-webkit-inner-spin-button {
+  display: none;
+}
+
+.upvote-buttons-container {
+    margin-top: 10px;
+    height: 10px;
+}
+
+.question-container a {
+    font-size: 1.25rem;
+}
+
+.question-bottom-board a {
+    font-size: 1rem;
+    margin-right: 7px;
+}
+
+.main-workspace ul {
+    /*width: 262px;*/
+    /*border: 1px purple solid;*/
+    /*border-radius: 5px;*/
+    /*background: #f4e0f7;*/
+    color: #4a004a;
+}
+
+.main-tag {
+    color: purple;
+}
+
+.author-name a {
+    font-size: 1rem;
+}
+
+.question-field {
+    height: 107px;
+}
+
+.question-text {
+    height: 50px;
+}
+
+/*------------------------------------------------------------*/
+
+.raz {
+    all: unset;
+    -moz-appearance: textfield;
+    width: 2em;
+    text-align: center;
+}
+.raz::-webkit-inner-spin-button {
+    display: none;
+}
+
+.upvote-buttons-container {
+    margin-top: 5px;
+    height: 10px;
+}
+
+.pagination label {
+    font-size: 1.125rem;
+    margin: 0 0 0 0;
+    padding: 0 5px 0 5px;
+}
+
+.pagination a {
+    margin: 0 0 0 0;
+    padding: 0 5px 0 5px;
+}

@@ -1,0 +1,14 @@
+<div class="row-fluid right-board">
+    <div class="row-fluid questions-header">
+        <label class="col-3">Hot Questions</label>
+        <a href=" {% url "new_questions" %} ">
+            New Questions
+        </a>
+
+        {% for question in pagination %}
+            {% include "include/questions list/question container.html" %}
+        {% endfor %}
+
+        {% include "include/questions list/pagination.html" %}
+    </div>
+</div>

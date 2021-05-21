@@ -1,0 +1,17 @@
+<!doctype html>
+{% extends "include/base.html" %}
+{% load static %}
+
+<html lang="en" class="h-100">
+    {% block css %}
+        <link href= "{% static 'css/2-add new question.css' %}" rel="stylesheet">
+    {% endblock css %}
+
+    {% block title %}
+        <title>2-add new question</title>
+    {% endblock title %}
+
+    {% block content %}
+        {% include "include/new question container.html" %}
+    {% endblock content %}
+</html>

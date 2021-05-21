@@ -1,0 +1,46 @@
+{% load static %}
+<div class="row-fluid settings-container">
+    <div class="row-fluid settings-header">
+        <label class="col-sm-2">Settings:</label>
+        <label class="profile-name col-sm-5">
+            {{ profile.nickname }}
+        </label>
+    </div>
+    <div class="row-fluid settings-board">
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Login:</label>
+            <div class="col-sm-5 tags-form">
+                <input type="text" class="form-control" value="{{ profile.login }}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-5 tags-form">
+                <input type="text" class="form-control" value="{{ profile.email }}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nickname:</label>
+            <div class="col-sm-5 tags-form">
+                <input type="text" class="form-control" value="{{ profile.nickname }}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Upload avatar:</label>
+            <div class="col-sm-5 tags-form">
+                <img src="{% static 'img/200.jpg' %}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="offset-sm-2 col-sm-5 tags-form">
+                <input type="file" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="offset-md-2 col-2">
+                <button class="btn btn-outline-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

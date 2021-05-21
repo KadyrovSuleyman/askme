@@ -1,0 +1,20 @@
+<!doctype html>
+{% extends "include/base.html" %}
+{% load static %}
+
+<html lang="en" class="h-100">
+    {% block css %}
+        <link href= "{% static 'css/4-tags listning.css' %}" rel="stylesheet">
+    {% endblock css %}
+
+    {% block title %}
+        <title>8-author listning</title>
+    {% endblock title %}
+
+    {% block content %}
+        {% include "include/authors list.html" %}
+    {% endblock content %}
+</html>
+
+
+

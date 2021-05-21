@@ -1,0 +1,21 @@
+<!doctype html>
+{% extends "include/base.html" %}
+{% load static %}
+
+<html lang="en" class="h-100">
+    {% block css %}
+        <link href= "{% static 'css/3-question page.css' %}" rel="stylesheet">
+    {% endblock css %}
+
+    {% block title %}
+        <title>3-question page</title>
+    {% endblock title %}
+
+    {% block content %}
+        {% include "include/question full.html" %}
+        {% include "include/answer container.html" %}
+        {% include "include/answer container.html" %}
+        {% include "include/new answer.html" %}
+    {% endblock content %}
+
+</html>

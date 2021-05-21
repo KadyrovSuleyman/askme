@@ -1,0 +1,30 @@
+<div class="row justify-content-end">
+    <div class="col-10 left-board">
+        <div class="row">
+            <label class="header-label">Popular tags</label>
+            <div class="container tags-container">
+                {% for tagsiter in tags %}
+                    <a class="header-link"
+                       href="{% url "view_tag"  tagname=tagsiter.name %}">
+                        {{ tagsiter.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            <label class="header-label">Best members</label>
+            <div class="container members-container">
+                <div class="row justify-content-start">
+<!--                    <a class="header-link" href="#">Mr.Freeman</a>-->
+<!--                    <a class="header-link" href="#">Dr.House</a>-->
+<!--                    <a class="header-link" href="#">Bender</a>-->
+<!--                    <a class="header-link" href="#">Queen Victoria</a>-->
+<!--                    <a class="header-link" href="#">V.Pupkin</a>-->
+                    {% for authorsiter in authors %}
+                        <a class="header-link" href="{% url "view_author" authorname=authorsiter.name %}">
+                            {{ authorsiter.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

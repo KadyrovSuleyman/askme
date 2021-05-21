@@ -1,0 +1,181 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    /*border: 1px red solid;*/
+}
+
+.navbar img {
+    width: 60px;
+    border: 2px purple solid;
+    border-radius: 30px;
+}
+
+.search-form {
+    width: 374px;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+
+.padding-0 {
+    padding: 0px;
+}
+
+.main-workspace {
+    margin-top: 90px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.navbar {
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    height: 76px;
+    padding-right: 15px;
+}
+
+.work-container {
+    float: right;
+    margin: 0 auto;
+}
+
+.left-board {
+    margin: 0px;
+    padding: 0px;
+    padding-right: 12px;
+}
+
+.header-label {
+    font-size: 1.5rem;
+}
+
+
+.tags-container {
+    height: 125px;
+}
+
+.tags-container a {
+    font-size: 1.125rem;
+    padding-right: 14px;
+    text-decoration: none;
+    color: purple;
+}
+
+.tags-container a:hover {
+    color: blue;
+}
+
+.members-container a {
+    font-size: 1.125rem;
+    color: #842029;
+}
+
+.members-container a:hover {
+    /*color: #270c79;*/
+    color: blue;
+}
+
+.members-container {
+    height: 175px;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.profile-label {
+    color: magenta;
+    padding-left: 7px;
+}
+
+.profile-link {
+    color: pink;
+    padding-left: 7px;
+}
+
+
+
+.profile-container a:hover {
+    color: red;
+}
+
+.btn-outline-success {
+    color: #d684c0;
+    border-color: #7c0c84;
+}
+
+.navbar-collapse a:hover {
+    background-color: purple;
+    border-color: #7c0c84;
+}
+
+.questions-container {
+    margin: 0px;
+    padding: 0px;
+}
+
+.questions-header label {
+    font-size: 1.625rem;
+    margin-right: 25px;
+    margin-bottom: 5px;
+}
+
+.questions-header a {
+    font-size: 1.125rem;
+    color: purple;
+}
+
+.new-question-board textarea {
+    border: 2px purple solid;
+    height: 175px;
+    border-radius: 10px;
+}
+
+.new-question-board input {
+    border: 2px purple solid;
+    border-radius: 10px;
+}
+
+.Log-in-board button {
+    background: #212529;
+    border: 2px purple solid;
+}
+
+.Log-in-board button:hover {
+    background-color: purple;
+    border-color: #7c0c84;
+}
+
+.wrong-password label {
+    color: #ff0018;
+    font-size: 1rem;
+}
+
+.Log-in-board a {
+    color: #842029;
+}
+
+.Log-in-board a:hover {
+    color: blue;
+}
+
+.Log-in-board input {
+    border: 2px purple solid;
+    border-radius: 10px;
+}

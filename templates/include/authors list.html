@@ -1,0 +1,11 @@
+<div class="row-fluid right-board">
+    <div class="row-fluid questions-header">
+        <label>Author:</label>
+        <label class="main-tag">{{ author }}</label>
+        {% for question in pagination %}
+            {% include "include/questions list/question container.html" %}
+        {% endfor %}
+
+        {% include "include/questions list/pagination.html" %}
+    </div>
+</div>
