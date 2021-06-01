@@ -1,0 +1,21 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+<link href="{% static "css/registration form.css" %}" rel="stylesheet">
+<div class="col-9">
+  <div class="row-fluid registration-container">
+      <div class="row-fluid registration-header">
+          <label>Registration</label>
+      </div>
+      <form class="registration-form novalidate" method="POST" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+                {% buttons %}
+                <button class="btn btn-dark" type="submit">Save</button>
+                {% endbuttons %}
+    </form>
+  </div>
+</div>
+{% endblock content %}

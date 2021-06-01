@@ -1,0 +1,16 @@
+{% load static %}
+
+  <ul class="pagination">
+    {% if objects.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1"> &laquo; First</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ objects.previous_page_number }}">Prev</a></li>
+    {% endif %}
+
+    <li class="page-item"><a class="page-link" href="?page={{ objects.number }}">{{ objects.number }}</a></li>
+
+    {% if objects.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ objects.next_page_number }}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ objects.paginator.num_pages }}">Last &raquo;</a></li>
+    {% endif %}
+  </ul>
+

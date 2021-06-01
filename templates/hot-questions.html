@@ -6,8 +6,8 @@
 <div class="col-9">
     <div class="row-fluid right-board">
         <div class="row-fluid questions-header">
-            <label>New Questions</label>
-            <a href="{% url "hot_questions" %}">Hot Questions</a>
+            <label>Hot Questions</label>
+            <a href="{% url "index" %}">New Questions</a>
 
             {% for question in questions %}
                {% include "include/question.html" %}

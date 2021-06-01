@@ -1,0 +1,132 @@
+.questions-header label {
+    font-size: 1.625rem;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.questions-header a {
+    font-size: 1.125rem;
+    color: purple;
+}
+
+.questions-header a:hover {
+    color: blue;
+}
+
+.question-container a {
+    font-size: 1.125rem;
+    color: purple;
+}
+
+.question-container a:hover {
+    color: blue;
+}
+
+
+.question-container {
+    margin: 0px;
+    padding: 7px;
+    padding-top: 3px;
+    border: 2px #710071 solid;
+    border-radius: 10px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.question-container img {
+    width: 60px;
+    border: 2px purple solid;
+    border-radius: 30px;
+    padding: 0px;
+    margin-top: 5px;
+}
+
+.question-left-board {
+    padding-bottom: 10px;
+}
+
+.question-right-board {
+    padding-left: 0px;
+    /*height: 150px;*/
+}
+
+.question-left-board button {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 20px;
+    border: 1px purple solid;
+    border-radius: 3px;
+    background: #f4e0f7;
+    color: #4a004a;
+}
+
+.question-right-board label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    margin-right: 7px;
+}
+
+.raz {
+    all: unset;
+    -moz-appearance: textfield;
+    width: 2em;
+    text-align: center;
+}
+.raz::-webkit-inner-spin-button {
+    display: none;
+}
+
+.upvote-buttons-container {
+    margin-top: 5px;
+    height: 10px;
+}
+
+.upvote-buttons-container {
+    margin-top: 5px;
+    height: 10px;
+}
+
+.question-container a {
+    font-size: 1.25rem;
+}
+
+.question-bottom-board a {
+    font-size: 1rem;
+    margin-right: 7px;
+}
+
+.main-workspace ul {
+    /*width: 262px;*/
+    /*border: 1px purple solid;*/
+    /*border-radius: 5px;*/
+    /*background: #f4e0f7;*/
+    color: #4a004a;
+}
+
+.author-name a {
+    font-size: 1rem;
+}
+
+.question-field {
+    height: 107px;
+}
+
+.question-text {
+    height: 50px;
+}
+
+.customStepDown {
+  margin-right: 10px;
+}
+
+.customStepUp {
+  margin-left: 10px;
+}
+
+.form-group .btn-dark {
+  margin-top: 10px;
+}
+
+.row .header-label {
+  margin-top: 20px;
+}

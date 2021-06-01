@@ -1,0 +1,25 @@
+.registration-header label {
+    font-size: 1.5rem;
+}
+
+.registration-form input {
+    border: 2px purple solid;
+    border-radius: 10px;
+}
+
+.registration-form label {
+    margin-bottom: 3px;
+    margin-top: 15px;
+}
+
+.registration-form button {
+    background: #212529;
+    border: 2px purple solid;
+    margin-bottom: 15px;
+}
+
+.registration-form button:hover {
+    background-color: purple;
+    border-color: #7c0c84;
+    margin-bottom: 15px;
+}

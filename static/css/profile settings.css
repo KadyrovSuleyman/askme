@@ -1,0 +1,30 @@
+.settings-header label {
+    font-size: 1.625rem;
+    margin-right: 25px;
+    margin-bottom: 5px;
+}
+
+.profile-name {
+    color: purple;
+}
+
+.settings-input input {
+    border: 2px purple solid;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.settings-input label {
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.settings-input button {
+    background: #212529;
+    border: 2px purple solid;
+}
+
+.settings-input button:hover {
+    background-color: purple;
+    border-color: #7c0c84;
+}

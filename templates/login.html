@@ -1,0 +1,29 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+<link href="{% static "css/login form.css" %}" rel="stylesheet">
+<div class="col-9">
+  <div class="row-fluid questions-container">
+      <div class="row-fluid questions-header">
+          <label>Log In</label>
+      </div>
+
+      <form class="novalidate form-brush" method="POST" action="/login/">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+                <button class="btn btn-dark" type="submit">Log in!</button>
+        {% endbuttons %}
+                <div class="row">
+                    <div class="create-new col-3 float-left">
+                        <a class="nav-link" href="{% url "registration" %}">Create new account</a>
+                    </div>
+
+                </div>
+      </form>
+
+  </div>
+</div>
+{% endblock content %}

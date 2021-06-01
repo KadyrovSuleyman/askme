@@ -1,41 +1,15 @@
-from django.shortcuts import render
-from django.core.paginator import Paginator, PageNotAnInteger
+from django.shortcuts import render, redirect, reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from app import models
+from django.contrib import auth
+from django.contrib.auth.models import User
+from app.models import Profile, Question, Answer, Tag
+from app.forms import LoginForm, RegisterForm, SettingsForm, AskForm, AnswerForm
 
-questions = [
-    {
-        'id': idx,
-        'title': f'Title number {idx}',
-        'text': f'Some text for questions #{idx}',
-        'author': f'Author name # {idx}',
-        'date': f'{idx}.05.2021',
-        'tags': [
-            {
-                'tag': f'tag{j}'
-            } for j in range(3)
-        ]
-    } for idx in range(10)
-]
 
-tags = [
-    {
-        'name': f'tag{idx}',
-    } for idx in range(10)
-]
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
-profiles = [
-    {
-        'id': idx,
-        'login': f'login #{idx}',
-        'email': f'email #{idx}',
-        'nickname': f'nickname #{idx}',
-    } for idx in range(10)
-]
-
-authors = [
-    {
-        'name': f'Author name #{idx}',
-    } for idx in range(5)
-]
 
 def paginate(object_list, requset, per_page = 3):
     paginator = Paginator(object_list, per_page)
@@ -45,78 +19,129 @@ def paginate(object_list, requset, per_page = 3):
     except PageNotAnInteger:
         return paginator.get_page(1)
 
-def questions_listning(request):
-    pagination = paginate(questions, request, 3)
-    return render(request, '1-questions listning.html', {'questions': questions,
-                                                         'tags': tags,
-                                                         'profiles': profiles,
-                                                         'authors': authors,
-                                                         'pagination': pagination})
-
-
 
 
 def index(request):
-    pagination = paginate(questions, request, 3)
-    return render(request, 'index.html', {'questions': questions,
-                                          'tags': tags,
-                                          'profiles': profiles,
-                                          'authors': authors,
-                                          'pagination': pagination})
+    questions = Question.objects.new().annotate(num_answers = Count('answer'))
+    pagination_questions = paginate(questions, request, 5)
+    return render(request, 'index.html', {'questions': pagination_questions})
 
-def new_question(request):
-    return render(request, '2-add new question.html', {'tags': tags,
-                                                       'profiles': profiles,
-                                                       'authors': authors})
+@login_required
+def ask(request):
+    if request.method == 'GET':
+        form = AskForm()
+    else:
+        form = AskForm(data=request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user.profile
+            question.save()
+            tags_name = form.cleaned_data.get('tags')
+            tag_name_array = [x.strip() for x in tags_name.split(',')]
+            for tag_name in tag_name_array:
+              tag_names = Tag.objects.filter(name=tag_name)
+              if not tag_names:
+                tags = Tag.objects.create(name=tag_name)
+                tags.save()
+              tag = Tag.objects.get(name=tag_name)
+              question.tags.add(tag.id)
+            return redirect(reverse('one_question', kwargs={'pk': question.pk}))
 
-def view_question(request, pk):
-    question = questions[pk]
-    return render(request, '3-question page.html', {'question': question,
-                                                    'tags': tags,
-                                                    'profiles': profiles,
-                                                    'authors': authors})
+    return render(request, 'ask.html',  {'form': form})
 
-def view_tag(request, tagname):
-    tag = tagname
-    pagination = paginate(questions, request, 3)
-    return render(request, '4-tags listning.html', {'questions': questions,
-                                                    'tags': tags,
-                                                    'tag': tag,
-                                                    'profiles': profiles,
-                                                    'authors': authors,
-                                                    'pagination': pagination})
 
-def settings(request, profileid):
-    profile = profiles[profileid]
-    return render(request, '5-profile settings.html', {'tags': tags,
-                                                       'profile': profile,
-                                                       'profiles': profiles,
-                                                       'authors': authors})
+def one_question(request, pk):
+    question = Question.objects.find_by_pk(pk)
+    answers = Answer.objects.find_by_question(question)
+    pagination_answers = paginate(answers, request, 5)
+    question.num_answers = len(answers)
+    
+    if request.method == 'GET':
+        form = AnswerForm()
+    else:
+        form = AnswerForm(data=request.POST)
+        if form.is_valid():
+            if request.user.is_authenticated:
+                answer = form.save(commit=False)
+                answer.user = request.user.profile
+                answer.question_id = pk
+                answer.save()
+                return redirect(reverse('one_question', kwargs={'pk': pk}))
+            else:
+                return redirect(reverse('login'))
+    return render(request, 'question.html', {"question": question, "answers": pagination_answers, 'form': form})
+
+
+def tag_questions(request, pk):
+  tag_questions_array = Question.objects.find_by_tag(pk).annotate(num_answers = Count('answer'))
+  pagination_questions = paginate(tag_questions_array, request, 5)
+  return render(request, 'tag-questions.html', {"questions" : pagination_questions, "tag": pk})
+
+@login_required
+def settings(request):
+  if request.method == 'GET':
+        form = SettingsForm(initial={'login': request.user.username, 'email':  request.user.email,})
+  else:
+        form = SettingsForm(request.POST, request.FILES, request.user)
+        if form.is_valid():
+          if form.cleaned_data.get('login'):
+            request.user.username = form.cleaned_data.get('login')
+          if form.cleaned_data.get('email'):
+            request.user.email = form.cleaned_data.get('email')
+          avatar = form.cleaned_data.get('avatar')
+          if avatar:
+            request.user.profile.avatar = avatar
+          request.user.save()
+          request.user.profile.save()
+          return redirect(reverse('settings'))
+
+  return render(request, 'settings.html', {'form': form})
+
 
 def login(request):
-    return render(request, '6-autorization form.html', {'tags': tags,
-                                                        'profiles': profiles,
-                                                        'authors': authors})
+    if request.method == 'GET':
+        form = LoginForm()
+        next_page = request.GET.get('next','')
+        request.session['next_page'] = next_page
+    else:
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = auth.authenticate(request, **form.cleaned_data)
+            if user is not None:
+                auth.login(request, user)
+                next_page = request.session.pop('next_page')
+                if next_page:
+                    return redirect(next_page)
+                else:
+                    return redirect(reverse('index'))
+            else:
+               form.add_error(None, 'Authentication error')
+
+    return render(request, 'login.html', {'form': form})
+
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    return redirect("/")
 
 def registration(request):
-    return render(request, '7-registration form.html', {'tags': tags,
-                                                        'profiles': profiles,
-                                                        'authors': authors})
+    if request.method == 'GET':
+        form = RegisterForm()
+    else:
+        form = RegisterForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            profile = Profile.objects.create(user = user, nickname = user.username)
+            profile.save()
+            return redirect(reverse('index'))
+
+    return render(request, 'signup.html', {'form': form})
 
 def hot_questions(request):
-    pagination = paginate(questions, request, 3)
-    return render(request, '0-hot questions.html', {'questions': questions,
-                                                    'tags': tags,
-                                                    'profiles': profiles,
-                                                    'authors': authors,
-                                                    'pagination': pagination})
+    questions = Question.objects.hot()
+    questions = questions.annotate(num_answers = Count('answer'))
+    pagination_questions = paginate(questions, request, 5)
 
-def view_author(request, authorname):
-    author = authorname
-    pagination = paginate(questions, request, 3)
-    return render(request, '8-author listning.html', {'questions': questions,
-                                                      'tags': tags,
-                                                      'author': authorname,
-                                                      'profiles': profiles,
-                                                      'authors': authors,
-                                                      'pagination': pagination})
+    return render(request, 'hot-questions.html', {'questions': pagination_questions})

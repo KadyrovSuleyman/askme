@@ -1,0 +1,37 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+  {% block content %}
+<link href="{% static "css/question page.css" %}" rel="stylesheet">
+  <div class="col-9">
+    <div class="row-fluid right-board">
+        <div class="row-fluid questions-header">
+
+          {% include "include/question.html" %}
+
+          {% for answer in answers %}
+            {% include "include/answer.html" %}
+          {% endfor %}
+
+
+          {% with objects=answers %}
+            {% include "include/pagination.html" %}
+          {% endwith %}
+
+  
+          <form class="form novalidate answer-enter" method="POST" novalidate>
+            {% csrf_token %}
+    
+            {% bootstrap_form form %}
+            <div class="row">
+            {% buttons %}
+              <button class="btn btn-dark" type="submit">Answer</button>
+            {% endbuttons %}
+             </div>
+          </form>
+        </div>
+        
+    </div>
+</div>
+  {% endblock content %}

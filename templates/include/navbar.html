@@ -1,24 +1,49 @@
+
+{% load static %}
+
+{% block navbar_content %}
 <header>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class=" container-sm">
-            <a class="navbar-brand" href="{% url "new_questions" %}">AskKadyrov</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="d-flex">
-                    <input class="form-control me-2 search-form" type="search" placeholder="Search" aria-label="Search">
-                    <a class="btn btn-outline-success" role="button"
-                       href = "{% url "new_question" %}">
-                        Ask!
-                    </a>
-                </form>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class=" container-sm">
+          <a class="navbar-brand" href="{% url "index" %}">AskKadyrov</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+              <form class="d-flex">
+                  <input class="form-control me-2 search-form" type="search" placeholder="Search" aria-label="Search">
+                  <a href="{% url "ask" %}"><button type="button" class="btn btn-outline-success">Ask!</button></a>
+              </form>
+          </div>
+      </div>
+      {% if request.user.is_authenticated %}
+      <div class="container profile-container justify-content-end">
+          <div class="col-xs offset-md-7">
+              <img src="{{request.user.profile.avatar.url}}">
+          </div>
+          <div class="col offset padding-0 justify-content-start">
+              <div class="col">
+                  <label class="profile-label">{{request.user.profile.nickname}}</label>
+              </div>
+              <div class="col">
+                  <a class="profile-link" href="{% url "settings" %}">Setting</a>
+                  <a class="profile-link" href="{% url "logout" %}">Log out</a>
+              </div>
+          </div>
+      </div>
+      {% else %}
+      <div class="container profile-container justify-content-end">
+        <div class="col-xs offset-md-7"></div>
+        <div class="col offset padding-0 justify-content-start">
+            <div class="col">
+                <a class="profile-link" href="{% url "login" %}">Log in</a>
+                <a class="profile-link" href="{% url "registration" %}">Register</a>
             </div>
         </div>
-        <div class="container profile-container justify-content-end">
-            {% include "include/navbar/autoriz.html" %}
-<!--            {% include "include/navbar/unautoriz.html" %}-->
-        </div>
-    </nav>
+      </div>
+      {% endif %}
+  </nav>
 </header>
+{% endblock navbar_content %}
+
