@@ -1,9 +1,10 @@
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from random import randint
 from django.db.models import indexes
+
+import time
 
 
 # Create your models here.
@@ -21,9 +22,27 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-        
-        
 
+
+# --------------------------------------------
+
+class AuthorManager(models.Manager):
+
+    def calc_rating(self):
+        time.sleep(5)
+        return ['user1', 'user2']
+
+
+class Author(models.Model):
+    avatar = models.ImageField(
+        upload_to='avatar/%Y/%m/%d', default='avatar.jpg')
+    rating = models.IntegerField(default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    objects = AuthorManager()
+
+
+# --------------------------------------------
 
 class QuestionManager(models.Manager):
     def new(self):
@@ -57,7 +76,6 @@ class Question(models.Model):
         verbose_name_plural = 'Вопросы'
         indexes = [models.Index(fields=['rating']),
                    models.Index(fields=['date_created'])]
-
 
 
 class AnswerManager(models.Manager):
@@ -102,34 +120,21 @@ class Tag(models.Model):
         verbose_name_plural = 'Тэги'
 
 
-class AnswerLikes(models.Model):
-    class Value(models.IntegerChoices):
-      LIKE = 1
-      DISLIKE = -1
-    
-    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
-    answer = models.ForeignKey('Answer', on_delete=models.CASCADE)
-    value = models.IntegerField(choices=Value.choices, default=1)
-
-    def __str__(self):
-        return self.answer.question.title + '/' + self.user.nickname
-
-    class Meta:
-        verbose_name = 'Лайк ответа'
-        verbose_name_plural = 'Лайки ответов'
-
-
-class QuestionLikes(models.Model):
-    class Value(models.IntegerChoices):
-      LIKE = 1
-      DISLIKE = -1
+class Vote(models.Model):
+    LIKE = 1
+    DISLIKE = -1
+    CHOICES = {(LIKE, 'like'), (DISLIKE, 'dislike')}
+    ACTIONS = {x[1]: x[0] for x in CHOICES}
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
-    value = models.IntegerField(choices=Value.choices, default=1)
+    value = models.IntegerField()
 
-    def __str__(self):
-        return self.question.title + '/' + self.user.nickname
 
-    class Meta:
-        verbose_name = 'Лайк вопроса'
-        verbose_name_plural = 'Лайки вопросов'
+class AnswerVote(models.Model):
+    LIKE = 1
+    DISLIKE = -1
+    CHOICES = {(LIKE, 'like'), (DISLIKE, 'dislike')}
+    ACTIONS = {x[1]: x[0] for x in CHOICES}
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    answer = models.ForeignKey('Answer', on_delete=models.CASCADE)
+    value = models.IntegerField()

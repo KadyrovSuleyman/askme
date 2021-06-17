@@ -12,10 +12,14 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-  
+
+
+
+# --------------------------------------------
+
 
 class SettingsForm(forms.Form):
-   
+
     def __init__(self, *args, **kwargs):
       user = None
       if len(args) == 3:
@@ -23,11 +27,11 @@ class SettingsForm(forms.Form):
         self.user = args[2]
       else:
         super(SettingsForm, self).__init__(*args, **kwargs)
-   
+
     login = forms.CharField(required=False)
     email = forms.EmailField(required=False)
     avatar = forms.ImageField(required=False)
-     
+
 
     def clean(self):
       cleaned_data = super().clean()
@@ -44,6 +48,7 @@ class SettingsForm(forms.Form):
           self.add_error('email', 'This email has already been registered!')
       return cleaned_data
 
+# --------------------------------------------
 
 class AskForm(forms.ModelForm):
     tags = forms.CharField()
@@ -61,6 +66,5 @@ class AnswerForm(forms.ModelForm):
         fields = ['text']
         labels = { 'text': "", }
       
-       
 
 

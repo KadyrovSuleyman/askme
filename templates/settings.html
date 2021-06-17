@@ -2,6 +2,7 @@
 {% load static %}
 {% load bootstrap4 %}
 
+
 {% block content %}
 <link href="{% static "css/profile settings.css" %}" rel="stylesheet">
 <div class="col-9">
@@ -10,7 +11,7 @@
           <label>Settings:</label>
           <label class="profile-name">{{request.user.profile.nickname}}</label>
       </div>
-      <form action="" class="novalidate settings-input" enctype="multipart/form-data" method="POST" novalidate>
+      <form action="" class="novalidate settings-input" enctype="multipart/form-data" method="POST" novalidate enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
                 {% buttons %}
@@ -19,4 +20,5 @@
     </form>
   </div>
 </div>
+
 {% endblock content %}

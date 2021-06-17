@@ -142,10 +142,6 @@
     height: 10px;
 }
 
-.upvote-buttons-container {
-    margin-top: 5px;
-    height: 10px;
-}
 
 .question-container a {
     font-size: 1.25rem;
@@ -176,13 +172,13 @@
     height: 50px;
 }
 
-.customStepDown {
-  margin-right: 10px;
-}
+/*.customStepDown {*/
+/*  margin-right: 10px;*/
+/*}*/
 
-.customStepUp {
-  margin-left: 10px;
-}
+/*.customStepUp {*/
+/*  margin-left: 10px;*/
+/*}*/
 
 .form-group .btn-dark {
   margin-top: 10px;

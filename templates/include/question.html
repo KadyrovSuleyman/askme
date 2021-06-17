@@ -3,20 +3,33 @@
 <div class="container-fluid question-container">
   <div class="row">
       <div class="col-2 question-left-board">
-          <div class="row justify-content-center">
-            <img src="{% static "img/200.jpg" %}">
+          <div class="row" style="padding: 0 0 0 43px">
+              <img src="{{question.user.avatar.url}}">
           </div>
-          <div class="row justify-content-center upvote-buttons-container">
-              <button class="customStepDown" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
-              {{question.rating}}
-              <button class="customStepUp" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+          <div class="row justify-content-around upvote-buttons-container">
+              <div class="col" style="margin: 0;">
+                  <a href="#" class="js-vote" data-action="like" data-qid="{{question.pk}}" data-type = "question">
+
+<!--                     {% if vote.user != question.user %}-->
+<!--                     hidden-->
+<!--                     {% endif %}>-->
+                  up</a>
+              </div>
+              <div class="col" style="margin: 0; padding: 0; text-align: center; font-size: 1.25rem; color: darkblue">
+                  <p class="rating-score" data-qid="{{question.pk}}">
+                      {{question.rating}}
+                  </p>
+              </div>
+              <div class="col" style="margin: 0; ">
+                  <a href="#" class="js-vote" data-action="dislike" data-qid="{{question.pk}}" data-type = "question">down</a>
+              </div>
           </div>
       </div>
       <div class="col-10 question-right-board">
           <div class="row-fluid">
               <a href="{% url "one_question" pk=question.id %}">{{question.title}}</a>
           </div>
-          <div class="row-fluid">
+          <div class="row-fluid" style="height: 50px">
               <label>{{question.text}}</label>
           </div>
           <div class="row justify-content-between question-bottom-board">
