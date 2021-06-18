@@ -24,22 +24,12 @@
                                 <div class="row">
                                     <label class="header-label">Popular tags</label>
                                     <div class="container tags-container">
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.0 %}">{{popular_tags.0}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.1 %}">{{popular_tags.1}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.2 %}">{{popular_tags.2}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.3 %}">{{popular_tags.3}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.4 %}">{{popular_tags.4}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.5 %}">{{popular_tags.5}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.6 %}">{{popular_tags.6}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.7 %}">{{popular_tags.7}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.8 %}">{{popular_tags.8}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.9 %}">{{popular_tags.9}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.10 %}">{{popular_tags.10}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.11 %}">{{popular_tags.11}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.12 %}">{{popular_tags.12}}</a>
-                                        <a class="header-link" href="{% url "tag_questions" pk=popular_tags.13 %}">{{popular_tags.13}}</a>
-                                        <div class="popular-tags__tags-name">
-                                        </div>
+                                        
+                                        {% for it in popular_tags %}
+                                            <a class="header-link" href="{% url "tag_questions" pk=it %}">{{it}}</a>
+                                        {% endfor %}
+
+                                
                                     </div>
                                     <label class="header-label">Best members</label>
                                     <div class="container members-container">

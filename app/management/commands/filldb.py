@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from app.models import Profile, Question, Answer, Tag, QuestionLikes, AnswerLikes
+from app.models import Profile, Question, Answer, Tag, Vote, AnswerVote
 from random import choice, randint, choices
 from faker import Faker
 from django.db.models import Count, Sum
@@ -81,32 +81,20 @@ class Command(BaseCommand):
         Answer.objects.bulk_create(answers)
 
 
-    def fill_question_likes(self, cnt):       
+    def fill_question_votes(self, cnt):       
         profile_ids = list(Profile.objects.values_list('id', flat=True))
         questions_ids = list(Question.objects.values_list('id', flat=True))
-        question_likes = []
+        question_votes = []
         for i in range(cnt):
-          question_likes.append(QuestionLikes(
+          question_votes.append(Vote(
           user_id=choice(profile_ids), 
           question_id=choice(questions_ids), 
           value=choice([1, -1])))
-        QuestionLikes.objects.bulk_create(question_likes)
-
-
-    def fill_answer_likes(self, cnt):     
-        profile_ids = list(Profile.objects.values_list('id', flat=True))
-        answer_ids = list(Answer.objects.values_list('id', flat=True))
-        answer_likes = []
-        for i in range(cnt):
-          answer_likes.append(AnswerLikes(
-          user_id=choice(profile_ids), 
-          answer_id=choice(answer_ids), 
-          value=choice([1, -1])))
-        AnswerLikes.objects.bulk_create(answer_likes)
+        Vote.objects.bulk_create(question_votes)
 
 
     def fill_question_rating(self):
-        questions = Question.objects.all().annotate(num_likes = Sum('questionlikes__value'))
+        questions = Question.objects.all().annotate(num_likes = Sum('vote__value'))
         for question in questions:
           if question.num_likes:
             question.rating = question.num_likes
@@ -115,15 +103,27 @@ class Command(BaseCommand):
         Question.objects.bulk_update(questions, ['rating'])
 
 
+    def fill_answer_votes(self, cnt):       
+        profile_ids = list(Profile.objects.values_list('id', flat=True))
+        answer_ids = list(Answer.objects.values_list('id', flat=True))
+        answer_votes = []
+        for i in range(cnt):
+          answer_votes.append(AnswerVote(
+          user_id=choice(profile_ids), 
+          answer_id=choice(answer_ids), 
+          value=choice([1, -1])))
+        AnswerVote.objects.bulk_create(answer_votes)
+
 
     def fill_answer_rating(self):
-        answers = Answer.objects.all().annotate(num_likes = Sum('answerlikes__value'))
+        answers = Answer.objects.all().annotate(num_likes = Sum('answervote__value'))
         for answer in answers:
           if answer.num_likes:
             answer.rating = answer.num_likes
           else:
             answer.rating = 0
         Answer.objects.bulk_update(answers, ['rating'])
+
 
     def fill_with_tags(self):
       t = Tag.objects.all()
@@ -148,10 +148,11 @@ class Command(BaseCommand):
                 self.fill_tags(small)
                 self.fill_questions(small * 10)
                 self.fill_answers(small * 100)
-                self.fill_question_likes(small * 200)
-                self.fill_answer_likes(small * 200)
+                self.fill_question_votes(small * 200)
+                self.fill_answer_votes(small * 200)
                 self.fill_question_rating()
                 self.fill_answer_rating()
+                self.fill_with_tags()
 
             if (options[a] == 'medium'):
                 self.fill_users(medium)
@@ -159,19 +160,20 @@ class Command(BaseCommand):
                 self.fill_tags(medium)
                 self.fill_questions(medium * 10)
                 self.fill_answers(medium * 100)
-                self.fill_question_likes(medium * 200)
-                self.fill_answer_likes(medium * 200)
+                self.fill_question_votes(medium * 200)
+                self.fill_answer_votes(medium * 200)
                 self.fill_question_rating()
                 self.fill_answer_rating()
+                self.fill_with_tags()
 
             if (options[a] == 'large'):
-                #self.fill_users(large)
-                #self.fill_profiles(large)
-               # self.fill_tags(large)
-                #self.fill_questions(large * 10)
-                #self.fill_answers(large * 100)
-                #self.fill_question_likes(large * 200)
-                #self.fill_answer_likes(large * 200)
-                #self.fill_question_rating()
-                #self.fill_answer_rating()
+                self.fill_users(large)
+                self.fill_profiles(large)
+                self.fill_tags(large)
+                self.fill_questions(large * 10)
+                self.fill_answers(large * 100)
+                self.fill_question_votes(large * 200)
+                self.fill_answer_votes(large * 200)
+                self.fill_question_rating()
+                self.fill_answer_rating()
                 self.fill_with_tags()
