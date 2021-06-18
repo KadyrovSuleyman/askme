@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 from app import views
 urlpatterns = [
@@ -34,3 +35,6 @@ urlpatterns = [
     path('logout/', views.logout, name="logout"),
     path('signup/', views.registration, name='registration'),
 ]
+
+# for gunicorn static pages tests
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
